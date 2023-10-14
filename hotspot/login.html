@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="login.css" media="screen" />
+    <script type="text/javascript" src="/md5.js"></script>
+    <!-- font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <body class="login">
+    <form name="sendin" action="$(link-login-only)" method="post">
+      <input type="hidden" name="username" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script type="text/javascript">
+      function doLogin() {
+        document.sendin.username.value = document.login.username.value;
+        document.sendin.password.value = hexMD5("$(chap-id)" + document.login.password.value + "$(chap-challenge)");
+        document.sendin.submit();
+        return false;
+      }
+    </script>
+
+    <form class="vertical-form" name="login" action="$(link-login-only)" method="post" background="#A03472" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+      <div style="margin: 0; padding: 0; display: inline"></div>
+      <legend>
+        <img class="logo" src="logo-removebg-preview.png" width="150px" height="150px"/>
+      </legend>
+      <input name="username" class="text" type="text" value="" placeholder="Username" size="20" />
+      <input autocomplete="off" class="password" name="password" type="password" label="false" placeholder="Password" size="15" />
+      <input name="submit" type="submit" value="login"/>
+      <div class="footer">
+        <br /><br />
+        <p>Welcome to our wireless router XII TKJ 1 <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">click here</a></p>
+        <p><span style="color: #ffffff; font-size: 20px"></span>created by @theprnceofplvto</p>
+        <br />
+        <p></p>
+      </div>
+    </form>
+
+    <script type="text/javascript">
+      document.login.username.focus();
+    </script>
+
+    <script type="text/javascript">
+      document.oncontextmenu = function () {
+        return false;
+      };
+    </script>
+  </body>
+</html>
